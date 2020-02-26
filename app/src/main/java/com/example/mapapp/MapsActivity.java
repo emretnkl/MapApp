@@ -45,12 +45,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-
+            /*
                 mMap.clear();
                 LatLng userLocation = new LatLng(location.getLatitude(),location.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(userLocation).title("You are here."));
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation,15));
-
+            */
 
 
 
@@ -77,6 +77,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         } else {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,5000, 0, locationListener);
+
+            Location lastLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            LatLng userLastLocation = new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(userLastLocation).title("Your Last Location"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLastLocation,15));
+
         }
 
 
