@@ -46,7 +46,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onLocationChanged(Location location) {
 
-                System.out.println("location:" + location.toString());
+                mMap.clear();
+                LatLng userLocation = new LatLng(location.getLatitude(),location.getLongitude());
+                mMap.addMarker(new MarkerOptions().position(userLocation).title("You are here."));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation,15));
+
+
+
 
             }
 
@@ -73,10 +79,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,5000, 0, locationListener);
         }
 
-        // Add a marker in Sydney and move the camera
-        LatLng galataTower = new LatLng(41.025904, 28.9736149);
-        mMap.addMarker(new MarkerOptions().position(galataTower).title("Marker in Galata Tower"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(galataTower,15));
+
     }
 
     @Override
